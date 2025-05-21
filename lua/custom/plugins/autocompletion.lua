@@ -30,6 +30,13 @@ return { -- Autocompletioreturn {
       nerd_font_variant = 'mono',
     },
 
+    signature = {
+      enabled = true,
+      window = {
+        border = 'rounded',
+      },
+    },
+
     completion = {
       menu = {
         auto_show = true,

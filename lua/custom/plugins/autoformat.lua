@@ -12,6 +12,7 @@ return { -- Autoformat
       desc = '[F]ormat buffer',
     },
   },
+
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
@@ -23,19 +24,33 @@ return { -- Autoformat
         return nil
       else
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_format = 'fallback',
         }
       end
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
+      markdown = { 'prettierd' },
+      json = { 'prettierd' },
+      javascript = { 'prettierd' },
+      yaml = { 'prettierd' },
       -- Conform can also run multiple formatters sequentially
       python = { 'isort', 'black' },
-      markdown = { 'prettierd' },
+      sql = { 'sql_formatter' },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
+    },
+    formatters = {
+      sql_formatter = {
+        command = 'sql-formatter',
+        args = {
+          '--config',
+          '{ "language": "postgresql", "keywordCase": "upper" }',
+        },
+        stdin = true, -- add content not file path
+      },
     },
   },
 }
