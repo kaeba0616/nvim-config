@@ -151,7 +151,18 @@ return {
     }
 
     local servers = {
-      gopls = {},
+      gopls = {
+        root_makers = { 'go.mod', '.git' },
+        settings = {
+          gopls = {
+            usePlaceholders = true,
+            analyses = {
+              unusedfunc = false,
+              unusedparams = false,
+            },
+          },
+        },
+      },
       pyright = {
         settings = {
           python = {
@@ -186,13 +197,10 @@ return {
     require('mason-lspconfig').setup {
       ensure_installed = {},
       automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
     }
+    for server_name, server_config in pairs(servers) do
+      local config = vim.tbl_deep_extend('force', { capabilites = capabilities }, server_config)
+      vim.lsp.config(server_name, config)
+    end
   end,
 }
