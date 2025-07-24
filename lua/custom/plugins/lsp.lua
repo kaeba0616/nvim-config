@@ -30,6 +30,18 @@ return {
     local lspconfig = require 'lspconfig'
 
     lspconfig['lua_ls'].setup { capabilities = capabilities }
+
+    -- ms(add import statements in Golang)
+    -- vim.api.nvim_create_autocmd('BufWritePre', {
+    --   pattern = '*.go',
+    --   callback = function()
+    --     vim.lsp.buf.code_action {
+    --       context = { only = { 'source.organizeImports' }, triggerKind = 2 },
+    --       apply = true,
+    --     }
+    --   end,
+    -- })
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -152,10 +164,11 @@ return {
 
     local servers = {
       gopls = {
-        root_makers = { 'go.mod', '.git' },
+        root_markers = { 'go.mod', '.git' },
         settings = {
           gopls = {
             usePlaceholders = true,
+            gofumpt = true,
             analyses = {
               unusedfunc = false,
               unusedparams = false,

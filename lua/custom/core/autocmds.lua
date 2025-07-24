@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'go',
+  pattern = { 'go', 'markdown', 'sql' },
   callback = function()
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4

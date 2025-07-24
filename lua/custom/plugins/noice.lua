@@ -12,6 +12,7 @@ return {
     --   If not available, we use mini as the fallback
     'rcarriga/nvim-notify',
   },
+
   config = function()
     require('noice').setup {
       presets = {
@@ -19,4 +20,5 @@ return {
       },
     }
   end,
+  vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<CR>', { desc = '[N]oice [D]ismiss' }),
 }

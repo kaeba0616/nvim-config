@@ -62,7 +62,11 @@ return { -- Autocompletioreturn {
     },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        sql = { 'dadbod', 'snippets', 'buffer' },
+      },
       providers = {
+        dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
         path = {
           opts = {
             get_cwd = function(_)

@@ -78,7 +78,7 @@ local mappings = {
 }
 
 -- Dynamic mappings for <leader>1 to <leader>5 and <leader>h1 to <leader>h5
-for _, idx in ipairs { 1, 2, 3, 4, 5 } do
+for _, idx in ipairs { 1, 2, 3, 4, 5, 6 } do
   table.insert(mappings, {
     string.format('<leader>%d', idx),
     function()
